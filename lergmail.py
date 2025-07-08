@@ -49,8 +49,11 @@ def main():
     # Tentar ler e-mails
     # https://www.googleapis.com/gmail/v1/users/me/messages?q=in:sent after:2014/01/01 before:2014/02/01
     servico = build("gmail","v1",credentials=creds,)
-    resultado = servico.users().messages().list(userId="me").execute()
+    resultado = servico.users().messages().list(userId="me", maxResults=500, q='from:no-reply@99freelas.com.br').execute()
+    ids=[]
     print(resultado)
+    for message in resultado['messages']:      
+      ids.append(message['id'])
 
     idmessage = '197c2aa7c5610e07'
     #servico = build
