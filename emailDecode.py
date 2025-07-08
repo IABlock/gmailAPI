@@ -17,5 +17,5 @@ def decodificar_mensagem(mensagem_codificada):
 def emailDecodeHtml(data_str_base64):
     mensagem_codificada = data_str_base64   
     mensagem_decodificada = decodificar_mensagem(mensagem_codificada)
-    print(mensagem_decodificada)
+    #print(mensagem_decodificada)
     return mensagem_decodificada
