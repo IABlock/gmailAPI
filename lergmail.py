@@ -6,6 +6,8 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
+from emailDecode import emailDecodeHtml
+
 # If modifying these scopes, delete the file token.json.
 SCOPES = ["https://www.googleapis.com/auth/gmail.readonly"]
 
@@ -56,9 +58,13 @@ def main():
 
     #print(ids)
     idmessage = '197e454e6a078944'
-    for idmessage in ids:
-      resultado = servico.users().messages().get(userId="me", id=idmessage).execute()
-      print(resultado)
+    #for idmessage in ids:
+    resultado = servico.users().messages().get(userId="me", id=idmessage).execute()
+    data_str_html = resultado['payload']['body']['data']
+    resultadoHtml = emailDecodeHtml(data_str_html)
+    print(resultadoHtml)
+
+    return resultadoHtml
 
   except HttpError as error:
     # TODO(developer) - Handle errors from gmail API.
