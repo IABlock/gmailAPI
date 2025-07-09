@@ -3,6 +3,7 @@ from flask import Flask, jsonify, make_response, json
 from gmailleitura import lerEmail
 from gmailauth import autenticacao
 from emailLink import listaLinks
+from notionDatabase import listDatabase
 
 app = Flask(__name__)
 
@@ -21,6 +22,9 @@ def listalinks():
   else:
     print('Credenciais Invalidas')
 
+@app.route("/notion")
+def notionlink():
+  return listDatabase()
 
 if __name__ == "__main__":
   app.run(debug=True)
